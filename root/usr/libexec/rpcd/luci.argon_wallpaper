@@ -24,7 +24,7 @@ fetch_pic_url() {
 			"https://www.bing.com/HPImageArchive.aspx?format=js&n=1" |
 			jsonfilter -qe '@.images[0].url' |
 			sed 's/1920x1080/UHD/g')"
-                [ -n "${picpath}" ] && echo "https://www.bing.com${picpath}"
+		[ -n "${picpath}" ] && echo "//www.bing.com${picpath}"
 		;;
 	unsplash)
 		if [ -z "$API_KEY" ]; then

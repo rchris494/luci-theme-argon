@@ -257,6 +257,11 @@ select[multiple="multiple"] {
   margin: 5em auto;
 }
 
+.alert-message {
+  transform: none;
+  position: static;
+}
+
 .alert-message>h4 {
   font-size: 110%;
   font-weight: bold;
@@ -268,6 +273,11 @@ select[multiple="multiple"] {
 
 .alert-message .btn {
   padding: .3rem .6rem;
+}
+
+#maincontent > .alert-message {
+  position: fixed;
+  transform: translate(-50%, -50%);
 }
 
 .container .alert,
@@ -464,14 +474,16 @@ table>thead>tr>th,
   flex: 1 1 auto;
 }
 
-tr>td,
-tr>th,
-.tr>.td,
-.tr>.th,
-.cbi-section-table-row::before,
-#cbi-wireless>#wifi_assoclist_table>.tr:nth-child(2) {
-  border-top: thin solid #ddd;
-  padding: 1.1em 1.25rem;
+body:not([data-page="admin-dashboard"]) {
+  tr>td,
+  tr>th,
+  .tr>.td,
+  .tr>.th,
+  .cbi-section-table-row::before,
+  #cbi-wireless>#wifi_assoclist_table>.tr:nth-child(2) {
+    border-top: thin solid #ddd;
+    padding: 1.1em 1.25rem;
+  }
 }
 
 #cbi-wireless .td,
@@ -773,7 +785,6 @@ td>table>tbody>tr>td,
   color: var(--white);
   border: thin solid #eea236;
   background-color: #f0ad4e;
-  transition: opacity 0.5s ease-out;  
 }
 
 /* green */
@@ -1432,7 +1443,6 @@ body:not(.Interfaces) .cbi-rowstyle-2:first-child {
   cursor: pointer;
   user-select: none;
   font-size: 0;
-  color: #8898aa;
   background-color: currentColor;
   mask-image: var(--dropdown-arrow-icon);
   mask-repeat: no-repeat;
@@ -2494,12 +2504,8 @@ pre.command-output {
   padding: 1.5rem;
 }
 
-
 /* page fix */
 @import url("page-fix.less");
-
-/* responsive */
-@import url("responsive.less");
 
 .alert-message {
   transition: opacity 0.5s ease-out;
@@ -2508,3 +2514,6 @@ pre.command-output {
 .alert-message.fade-out {
   opacity: 0;
 }
+
+/* responsive */
+@import url("responsive.less");
