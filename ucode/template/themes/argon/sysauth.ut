@@ -120,7 +120,7 @@
 			</a>
 			<!-- Logo End -->
 			<!-- Login Form Start -->
-			<form class="form-login" method="post" action="{{ http.getenv("REQUEST_URI") }}">
+			<form class="form-login" method="post" action="{{ entityencode(http.getenv("REQUEST_URI"), true) }}">
 
 				{%- if (fuser): %}
 				<div class="errorbox">{{ _('Invalid username and/or password! Please try again.') }}</div>
