@@ -262,6 +262,26 @@ select[multiple="multiple"] {
   position: static;
 }
 
+// The transient status dialogs ("Applying configuration changes…",
+// "Waiting for rollback…", "Configuration changes applied.", etc.) carry
+// .alert-message (which forces a wide, top-anchored, position: static box)
+// together with .spinning or .notice. Re-center them on the viewport and
+// shrink them to their content. Using position: fixed also restores a
+// positioning context so the .spinning::before icon stays anchored inside the
+// box instead of escaping to #modal_overlay and drifting far-left. The larger
+// interactive .warning dialogs (rollback / unreachable, with headings and
+// buttons) are intentionally left with the default wide layout.
+.modal.alert-message.spinning,
+.modal.alert-message.notice {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  max-width: 24rem;
+  margin: 0;
+}
+
 .alert-message>h4 {
   font-size: 110%;
   font-weight: bold;
