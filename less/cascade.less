@@ -1004,13 +1004,17 @@ td>table>tbody>tr>td,
   background-color: #f9f9f9;
 }
 
+/* Hidden tabs stay invisible and take no height, but must keep their width:
+   LuCI pages such as Channel Analysis draw graphs in hidden tabs at load and
+   size them from offsetWidth, which display:none would make 0. LuCI's own
+   Bootstrap theme hides tabs the same way. The padding lives on the active
+   tab instead (below). */
 [data-tab-title] {
   overflow: hidden;
   height: 0;
   opacity: 0;
   margin: 0;
-  padding: 1rem 0;
-  display: none !important;
+  padding: 0;
 
   p {
     margin-left: 1rem;
@@ -1025,6 +1029,7 @@ td>table>tbody>tr>td,
   display: inherit !important;
   transition: opacity .25s ease-in;
   margin: inherit !important;
+  padding: 1rem 0;
 }
 
 

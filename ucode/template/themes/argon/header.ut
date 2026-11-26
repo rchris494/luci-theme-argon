@@ -48,12 +48,28 @@
 		bar_color = (mode == 'dark') ? dark_primary : primary;
 	}
 
+	// LuCI's own themes mark dark mode with data-darkmode on <html>, and apps
+	// (CPU Status, Internet Detector, modemband) key their dark colours off it.
+	// Forced modes set it here; "Follow system" sets it from the browser below.
+	const darkpref = (mode == 'dark') ? 'true' : ((mode == 'light') ? 'false' : null);
+
 -%}
 <!DOCTYPE html>
-<html lang="{{ dispatcher.lang }}">
+<html lang="{{ dispatcher.lang }}" {{ darkpref ? `data-darkmode="${darkpref}"` : '' }}>
 
 <head>
 	<meta charset="utf-8">
+	{% if (!darkpref): %}
+	<script>
+		(function() {
+			var mq = window.matchMedia('(prefers-color-scheme: dark)'),
+			    root = document.documentElement,
+			    set = function(m) { root.setAttribute('data-darkmode', m.matches) };
+			mq.addEventListener('change', set);
+			set(mq);
+		})();
+	</script>
+	{% endif %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>{{ hostname }}{{ node?.title ? ` - ${striptags(node.title)}` : '' }} - LuCI</title>
 
